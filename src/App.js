@@ -1,41 +1,24 @@
 import React, { Component } from 'react';
-import { NICE, SUPER_NICE } from './colors';
-import { Alert } from 'elemental';
+import { Button, Row, Col} from 'elemental';
+import { Link } from 'react-router';
 
-class Counter extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { counter: 0 };
-    this.interval = setInterval(() => this.tick(), 1000);
-  }
-
-  tick() {
-    this.setState({
-      counter: this.state.counter + this.props.increment
-    });
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
+class App extends Component {
   render() {
     return (
-      <h1 style={{ color: this.props.color }}>
-        Counter ({this.props.increment}): {this.state.counter}
-      </h1>
+      <Row>
+        <Col sm="1/4"/>
+        <Col sm="2/4">
+          <h1> This is an application </h1>
+          <Button type="primary">Primary</Button>
+          <Link to="/">Home</Link>
+          <Link to="/about">About</Link>
+
+          {this.props.children}
+        </Col>
+        <Col sm="1/4"/>
+      </Row>
     );
   }
 }
 
-export class App extends Component {
-  render() {
-    return (
-      <div>
-        <Alert type="info"><strong>Info:</strong> This could be something helpful, better read it just to make sure.</Alert>
-        <Counter increment={1} color={NICE} />
-        <Counter increment={5} color={SUPER_NICE} />
-      </div>
-    );
-  }
-}
+export default App;
