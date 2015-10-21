@@ -1,22 +1,28 @@
 import React, { Component } from 'react';
 import { Button, Row, Col} from 'elemental';
 import { Link } from 'react-router';
+import { LinkContainer } from 'react-router-bootstrap';
+
+const style = {
+  width: '60%',
+  margin: '0 auto',
+};
 
 class App extends Component {
   render() {
     return (
-      <Row>
-        <Col sm="1/4"/>
-        <Col sm="2/4">
-          <h1> This is an application </h1>
-          <Button type="primary">Primary</Button>
-          <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
+      <main style={style}>
+        <Row>
+          <LinkContainer to="/">
+            <Button type="primary">Home</Button>
+          </LinkContainer>
 
+          <LinkContainer to="/about">
+            <Button type="primary">About</Button>
+          </LinkContainer>
           {this.props.children}
-        </Col>
-        <Col sm="1/4"/>
-      </Row>
+        </Row>
+      </main>
     );
   }
 }
