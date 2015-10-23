@@ -1,36 +1,46 @@
 import React from 'react';
 import App from './App';
 import About from './About';
+import TodoContainer from './containers/TodoContainer';
 import ReactDOM from 'react-dom';
 import * as reducers from './reducers/index';
 
 // React Router
-import { Router, Route, Link } from 'react-router';
+import { Route } from 'react-router';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 
 // Redux
 import {
   ReduxRouter,
   reduxReactRouter,
-  routerStateReducer
+  routerStateReducer,
 } from 'redux-router';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
+import {
+  createStore,
+  applyMiddleware,
+  combineReducers,
+  compose,
+} from 'redux';
 import createLogger from 'redux-logger';
+import { Provider } from 'react-redux';
+import thunkMiddleware from 'redux-thunk';
 
 const logger = createLogger();
 
-const rootReducer = combineReducers({router: routerStateReducer }, reducers);
+// Combine all my personal reducers with the Redux Router reducer
+const rootReducer = combineReducers(
+  {router: routerStateReducer, ...reducers }
+);
 
 const store = compose(
   reduxReactRouter({ createHistory: createBrowserHistory }),
-  applyMiddleware(logger),
+  applyMiddleware(thunkMiddleware, logger),
 )(createStore)(rootReducer);
 
 const routes = (
   <ReduxRouter>
     <Route path="/" component={App}>
-      <Route path="about" component={About} />
+      <Route path="todos" component={TodoContainer} />
     </Route>
   </ReduxRouter>
 );

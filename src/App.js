@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Row, Col} from 'elemental';
-import { Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import { connect } from 'react-redux';
+import { RaisedButton } from 'material-ui';
 
 const style = {
   width: '60%',
@@ -14,17 +13,15 @@ class App extends Component {
   render() {
     return (
       <main style={style}>
-        <Row>
-          <LinkContainer to="/">
-            <Button type="primary">Home</Button>
-          </LinkContainer>
+        <LinkContainer to="/">
+          <RaisedButton label="Home" primary={true} />
+        </LinkContainer>
 
-          <LinkContainer to="/about">
-            <Button type="primary">About</Button>
-          </LinkContainer>
+        <LinkContainer to="/todos">
+          <RaisedButton label="Todos" primary={true} />
+        </LinkContainer>
 
-          {this.props.children}
-        </Row>
+        {this.props.children}
       </main>
     );
   }

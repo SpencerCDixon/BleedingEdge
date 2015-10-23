@@ -11,7 +11,7 @@ export default function(state = initialState, action) {
       todos: [...state.todos, {
         text: action.text,
         completed: false,
-      }]
+      }],
     });
   default:
     return state;
