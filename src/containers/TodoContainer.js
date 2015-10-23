@@ -1,15 +1,17 @@
-import React, { Component } from 'react';
-import { findDOMNode } from 'react-dom';
+import React, { Component, PropTypes } from 'react';
 import { RaisedButton, TextField } from 'material-ui';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as TodoActions from '../actions/TodoActions';
 
-@connect(state => ({ todos: state.Todo.todos }))
+const propTypes = {
+  todos: PropTypes.array.isRequired,
+  actions: PropTypes.object.isRequired,
+};
+
 class TodoContainer extends Component {
   constructor(props) {
     super(props);
-    this.actions = bindActionCreators(TodoActions, this.props.dispatch);
     this.handleAddTodo = this.handleAddTodo.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.state = {
@@ -18,7 +20,7 @@ class TodoContainer extends Component {
   }
 
   handleAddTodo() {
-    this.actions.addTodo(this.state.text);
+    this.props.actions.addTodo(this.state.text);
     this.setState({ text: '' });
   }
 
@@ -37,4 +39,21 @@ class TodoContainer extends Component {
   }
 }
 
-export default TodoContainer;
+TodoContainer.propTypes = propTypes;
+
+function mapStateToProps(state) {
+  return {
+    todos: state.Todo.todos,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(TodoActions, dispatch)
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TodoContainer);

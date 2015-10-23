@@ -1,6 +1,5 @@
 import React from 'react';
 import App from './App';
-import About from './About';
 import TodoContainer from './containers/TodoContainer';
 import ReactDOM from 'react-dom';
 import * as reducers from './reducers/index';
@@ -24,6 +23,8 @@ import {
 import createLogger from 'redux-logger';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
+import { persistState } from 'redux-devtools';
+import DevTools from './containers/DevTools';
 
 const logger = createLogger();
 
@@ -35,6 +36,8 @@ const rootReducer = combineReducers(
 const store = compose(
   reduxReactRouter({ createHistory: createBrowserHistory }),
   applyMiddleware(thunkMiddleware, logger),
+  DevTools.instrument(),
+  persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)),
 )(createStore)(rootReducer);
 
 const routes = (
@@ -46,11 +49,15 @@ const routes = (
 );
 
 class Root extends React.Component {
+
   render() {
     return (
       <div>
         <Provider store={store}>
-          {routes}
+          <div>
+            {routes}
+            <DevTools />
+          </div>
         </Provider>
       </div>
     );
