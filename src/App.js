@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { Button, Row, Col} from 'elemental';
 import { Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
+import { connect } from 'react-redux';
 
 const style = {
   width: '60%',
   margin: '0 auto',
 };
 
+@connect(state => ({ routerState: state.router }))
 class App extends Component {
   render() {
     return (
@@ -20,6 +22,7 @@ class App extends Component {
           <LinkContainer to="/about">
             <Button type="primary">About</Button>
           </LinkContainer>
+
           {this.props.children}
         </Row>
       </main>
