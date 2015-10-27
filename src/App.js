@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Nav } from './components/layout';
+import { Nav } from './components';
 
 const style = {
   width: '60%',
@@ -21,7 +21,7 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    routerStae: state.router,
+    routerState: state.router,
   };
 }
 
