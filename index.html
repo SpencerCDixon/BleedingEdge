@@ -2,6 +2,62 @@
 <html>
   <head>
     <title>React Transform Boilerplate</title>
+    <style type="text/css" media="all">
+      .tooltip {
+        border: 3px solid #18C2D8;
+        -webkit-border-radius: 30px;
+        height: 18px;
+        width: 18px;
+        -webkit-animation: pulsate 1s ease-out;
+        -webkit-animation-iteration-count: infinite;
+        opacity: 0.0
+      }
+
+      .tooltip-clicked {
+        display: none;
+      }
+
+      .tooltip-content {
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+        padding: 30px;
+        width: 300px;
+        opacity: 0.8;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 100;
+        text-transform: uppercase;
+        color: rgba(0, 0, 0, 0.87);
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      @-webkit-keyframes pulsate {
+        0% {-webkit-transform: scale(0.1, 0.1); opacity: 0.0;}
+        50% {opacity: 1.0;}
+        100% {-webkit-transform: scale(1.2, 1.2); opacity: 0.0;}
+      }
+
+      .example-enter {
+        opacity: 0.01;
+      }
+
+      .example-enter.example-enter-active {
+        opacity: 1;
+        transition: opacity 500ms ease-in;
+      }
+
+      .example-leave {
+        opacity: 1;
+      }
+
+      .example-leave.example-leave-active {
+        opacity: 0.01;
+        transition: opacity 300ms ease-in;
+      }
+    </style>
   </head>
   <body>
     <div id='root'></div>
