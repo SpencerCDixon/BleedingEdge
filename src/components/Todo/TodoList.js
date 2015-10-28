@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { List, ListItem } from 'material-ui';
+import { List } from 'material-ui';
+import TodoItem from './TodoItem';
 
 const propTypes = {
   todos: PropTypes.array.isRequired,
@@ -11,7 +12,10 @@ class TodoList extends Component {
   }
 
   render() {
-    const items = this.props.todos.map(todo => <ListItem key={todo.id} primaryText={todo.text} />)
+    const items = this.props.todos.map(function(todo){
+      return <TodoItem {...todo} />
+    });
+
     return (
       <List style={{width: '400'}}>
         {items}
