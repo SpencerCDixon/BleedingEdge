@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Nav, ToolTip } from './components';
+import { Nav } from './components';
 
 const style = {
   width: '60%',
@@ -12,8 +12,6 @@ class App extends Component {
     return (
       <main style={style}>
         <Nav />
-        <ToolTip />
-
         {this.props.children}
       </main>
     );
